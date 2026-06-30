@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="vi"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260630-03-6946cf4"}');</script><script src="/_sdk/e4192b04afde3ce7.telemetry_sdk.js" integrity="sha512-4eZpyKBd3YJnsIPrIpaBqo7QT5UZ6+KSFXkSu1IQiB7jKM8y67ChRhZ5Yh6JfuOJCbPdISiNcS6nLKZzIMG1uQ=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tích Điểm Học Sinh</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes bounce-in { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+    @keyframes wiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } }
+    @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+    .bounce-in { animation: bounce-in 0.4s ease-out; }
+    .wiggle { animation: wiggle 0.3s ease-in-out; }
+    .pop { animation: pop 0.3s ease-out; }
+    .float-anim { animation: float 3s ease-in-out infinite; }
+    .star-dot { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 2s ease-in-out infinite; }
+    .glass { background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); }
+    .student-card { transition: transform 0.2s; }
+    .student-card:hover { transform: translateY(-2px); }
+    .avatar-option { cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    .avatar-option:hover { transform: scale(1.2); }
+    .avatar-option.selected { box-shadow: 0 0 0 3px #a78bfa; background: rgba(167,139,250,0.25); transform: scale(1.15); }
+  </style>
+  <script src="/_sdk/5d8c692e132d2125.resizing_sdk.js" type="text/javascript" integrity="sha512-/Du3Fqe12kKsCd3BrbaNQEPtMxQi9S5hbJhnTf09AAilpqYsGa4N0rnimSX1Ui4dwNElKlen6VlI+E1n/NEfrA=="></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen p-3 sm:p-4 md:p-8 w-full relative overflow-x-hidden" style="background: radial-gradient(rgb(26, 5, 51), rgb(13, 0, 26), rgb(0, 0, 0));">
+  <div class="fixed inset-0 pointer-events-none" aria-hidden="true" id="stars-container"></div>
+  <header class="text-center mb-6 sm:mb-8 relative z-10">
+   <div class="float-anim inline-block text-3xl sm:text-4xl mb-2">
+    🚀
+   </div>
+   <h1 data-template-id="page-title" class="canva-text text-2xl sm:text-3xl md:text-4xl font-bold" style="color: rgb(233, 213, 255); font-weight: 700; font-style: normal; font-size: 32px;">🏆 Tích Điểm Học Sinh</h1>
+   <p data-template-id="page-subtitle" class="canva-text mt-1 sm:mt-2 text-sm sm:text-lg" style="color: rgb(196, 181, 253); font-weight: 500; font-style: normal; font-size: 16px;">Cùng cố gắng để nhận thật nhiều ngôi sao nhé! ⭐</p>
+  </header>
+  <main class="w-full max-w-2xl mx-auto relative z-10">
+   <section data-template-id="form-section" class="canva-card glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8" style="background: rgba(255, 255, 255, 0.06);">
+    <h2 data-template-id="form-title" class="canva-text text-lg sm:text-xl font-bold mb-3 sm:mb-4" style="color: rgb(167, 139, 250); font-weight: 700; font-style: normal; font-size: 24px;">➕ Thêm Học Sinh Mới</h2>
+    <form id="add-form" class="space-y-3 sm:space-y-4">
+     <div><label data-template-id="label-name" class="canva-text block mb-1 font-medium text-sm sm:text-base" for="input-name" style="color: rgb(216, 180, 254); font-weight: 500; font-style: normal; font-size: 16px;">Tên học sinh</label> <input id="input-name" type="text" data-template-id="input-name" class="canva-input w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-white/10 border border-white/20 focus:border-purple-400 focus:outline-none text-white placeholder-white/50 text-base sm:text-lg" required="" placeholder="Nhập tên bé..." style="font-weight: 500; font-style: normal; font-size: 16px;">
+     </div>
+     <div><label data-template-id="label-course" class="canva-text block mb-1 font-medium text-sm sm:text-base" for="input-course" style="color: rgb(216, 180, 254); font-weight: 500; font-style: normal; font-size: 16px;">Khóa học</label> <input id="input-course" type="text" data-template-id="input-course" class="canva-input w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-white/10 border border-white/20 focus:border-purple-400 focus:outline-none text-white placeholder-white/50 text-base sm:text-lg" required="" placeholder="Nhập khóa học..." style="font-weight: 500; font-style: normal; font-size: 16px;">
+     </div>
+     <div><label data-template-id="label-avatar" class="canva-text block mb-1 font-medium text-sm sm:text-base" style="color: rgb(216, 180, 254); font-weight: 500; font-style: normal; font-size: 16px;">Chọn avatar</label>
+      <div id="avatar-picker" class="flex flex-wrap gap-2"></div>
+     </div><button data-template-id="add-button" type="submit" class="canva-button w-full py-2 sm:py-3 rounded-xl font-bold text-base sm:text-lg transition-transform hover:scale-105 active:scale-95" style="background: linear-gradient(135deg, rgb(124, 58, 237), rgb(236, 72, 153)); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">🌟 Thêm Học Sinh</button>
+    </form>
+   </section>
+   <div id="empty-state">
+    <p data-template-id="empty-text" class="canva-text text-center text-base sm:text-lg py-6 sm:py-8" style="color: rgb(167, 139, 250); font-weight: 500; font-style: normal; font-size: 16px;">Chưa có học sinh nào. Hãy thêm bé vào nhé! 🎈</p>
+   </div>
+   <div id="student-list" class="space-y-3 sm:space-y-4"></div>
+   <div id="limit-warning" class="hidden text-center p-4 bg-red-500/20 border border-red-400/30 rounded-xl text-red-300 font-medium mt-4">
+    Đã đạt giới hạn 999 học sinh!
+   </div>
+  </main>
+  <template id="student-template">
+   <div class="student-card bounce-in" data-student-id="">
+    <div data-template-id="student-card" class="canva-card glass rounded-2xl p-3 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+     <div class="text-3xl sm:text-4xl flex-shrink-0 card-avatar">
+      🎒
+     </div>
+     <div class="flex-1 min-w-0 w-full sm:w-auto">
+      <h3 data-template-id="student-name" class="canva-text font-bold text-base sm:text-lg truncate"></h3>
+      <p data-template-id="student-course" class="canva-text text-xs sm:text-sm truncate"></p>
+     </div>
+     <div class="flex items-center gap-2 w-full sm:w-auto"><button data-template-id="minus-btn" class="canva-button flex-1 sm:flex-none w-10 h-10 rounded-full font-bold text-lg sm:text-xl flex items-center justify-center transition-transform active:scale-90" aria-label="Trừ 10 điểm"></button>
+      <div class="text-center min-w-[60px]"><span data-template-id="points-display" class="canva-text font-bold text-xl sm:text-2xl"></span> <span class="text-xs block text-purple-300">điểm</span>
+      </div><button data-template-id="plus-btn" class="canva-button flex-1 sm:flex-none w-10 h-10 rounded-full font-bold text-lg sm:text-xl flex items-center justify-center transition-transform active:scale-90" aria-label="Cộng 10 điểm"></button>
+     </div>
+    </div>
+   </div>
+  </template>
+  <script src="/_sdk/1b3fd03dc4388925.editing_sdk.js" integrity="sha512-HMKOzljDmMX17c/2qSxjmF+UiKp+R4otySq8hHaEvGRy/hvyWCt6bbZj/JXZ7SqUr0MevSDJLobqwuD/kiyBkg=="></script>
+  <script src="/_sdk/48bf7c4c70d0d03c.data_sdk.js" integrity="sha512-e/yrQJz+prdXXt4yUvxXhl1WBGu3BRkP8X0fipGXI5gqiFClI7wI6K3TQnD7d63vx+BVhwzIvY6r8OrpX7lXJA=="></script>
+  <script>
+    // Stars
+    (function() {
+      const c = document.getElementById('stars-container');
+      for (let i = 0; i < 80; i++) {
+        const s = document.createElement('div');
+        s.className = 'star-dot';
+        s.style.left = Math.random() * 100 + '%';
+        s.style.top = Math.random() * 100 + '%';
+        s.style.animationDelay = Math.random() * 3 + 's';
+        s.style.width = s.style.height = (Math.random() * 2 + 1) + 'px';
+        c.appendChild(s);
+      }
+    })();
+
+    const avatars = ['🎒','📚','🌈','🦄','🐱','🐶','🌻','🎨','🚀','🍎','🦊','🐼','🦋','🌸','⭐','🎵','🏀','🎮'];
+    let selectedAvatar = avatars[0];
+    let students = [];
+
+    // Build avatar picker
+    (function() {
+      const picker = document.getElementById('avatar-picker');
+      avatars.forEach(em => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'avatar-option' + (em === selectedAvatar ? ' selected' : '');
+        btn.textContent = em;
+        btn.addEventListener('click', () => {
+          picker.querySelectorAll('.avatar-option').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedAvatar = em;
+        });
+        picker.appendChild(btn);
+      });
+    })();
+
+    const dataHandler = {
+      onDataChanged(data) {
+        students = data;
+        renderStudents();
+      }
+    };
+
+    function renderStudents() {
+      const list = document.getElementById('student-list');
+      const empty = document.getElementById('empty-state');
+      const existingMap = new Map([...list.children].map(el => [el.dataset.studentId, el]));
+
+      if (students.length === 0) {
+        empty.classList.remove('hidden');
+        list.innerHTML = '';
+        return;
+      }
+      empty.classList.add('hidden');
+
+      const newIds = new Set(students.map(s => s.__backendId));
+      existingMap.forEach((el, id) => { if (!newIds.has(id)) el.remove(); });
+
+      students.forEach(s => {
+        if (existingMap.has(s.__backendId)) {
+          const el = existingMap.get(s.__backendId);
+          el.querySelector('[data-template-id="student-name"]').textContent = s.name;
+          el.querySelector('[data-template-id="student-course"]').textContent = s.course;
+          el.querySelector('[data-template-id="points-display"]').textContent = s.points || 0;
+          el.querySelector('.card-avatar').textContent = s.avatar || '🎒';
+        } else {
+          const tpl = document.getElementById('student-template');
+          const clone = tpl.content.cloneNode(true);
+          const wrapper = clone.firstElementChild;
+          wrapper.dataset.studentId = s.__backendId;
+          clone.querySelector('.card-avatar').textContent = s.avatar || '🎒';
+          clone.querySelector('[data-template-id="student-name"]').textContent = s.name;
+          clone.querySelector('[data-template-id="student-course"]').textContent = s.course;
+          clone.querySelector('[data-template-id="points-display"]').textContent = s.points || 0;
+          clone.querySelector('[data-template-id="plus-btn"]').addEventListener('click', () => addPoints(s.__backendId));
+          clone.querySelector('[data-template-id="minus-btn"]').addEventListener('click', () => subtractPoints(s.__backendId));
+          list.appendChild(clone);
+        }
+      });
+    }
+
+    async function addPoints(id) {
+      const s = students.find(x => x.__backendId === id);
+      if (!s) return;
+      const btn = document.querySelector(`[data-student-id="${id}"] [data-template-id="plus-btn"]`);
+      btn.disabled = true;
+      const pointsEl = document.querySelector(`[data-student-id="${id}"] [data-template-id="points-display"]`);
+      pointsEl.classList.add('pop');
+      setTimeout(() => pointsEl.classList.remove('pop'), 300);
+      const result = await window.dataSdk.update({ ...s, points: (s.points || 0) + 10 });
+      btn.disabled = false;
+      if (result.isError) showToast('Lỗi cập nhật điểm!');
+    }
+
+    async function subtractPoints(id) {
+      const s = students.find(x => x.__backendId === id);
+      if (!s || (s.points || 0) <= 0) return;
+      const btn = document.querySelector(`[data-student-id="${id}"] [data-template-id="minus-btn"]`);
+      btn.disabled = true;
+      const card = document.querySelector(`[data-student-id="${id}"]`);
+      card.classList.add('wiggle');
+      setTimeout(() => card.classList.remove('wiggle'), 300);
+      const result = await window.dataSdk.update({ ...s, points: Math.max(0, (s.points || 0) - 10) });
+      btn.disabled = false;
+      if (result.isError) showToast('Lỗi cập nhật điểm!');
+    }
+
+    document.getElementById('add-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (students.length >= 999) {
+        document.getElementById('limit-warning').classList.remove('hidden');
+        return;
+      }
+      const name = document.getElementById('input-name').value.trim();
+      const course = document.getElementById('input-course').value.trim();
+      if (!name || !course) return;
+      const btn = document.querySelector('[data-template-id="add-button"]');
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+      const result = await window.dataSdk.create({ name, course, points: 0, avatar: selectedAvatar });
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      if (result.isOk) {
+        document.getElementById('input-name').value = '';
+        document.getElementById('input-course').value = '';
+      } else {
+        showToast('Lỗi thêm học sinh!');
+      }
+    });
+
+    function showToast(msg) {
+      const t = document.createElement('div');
+      t.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 bounce-in';
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 3000);
+    }
+
+    (async () => {
+      const r = await window.dataSdk.init(dataHandler);
+      if (r.isError) showToast('Không thể kết nối dữ liệu!');
+      lucide.createIcons();
+    })();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a13ac184f63cce4b',t:'MTc4Mjc5NzE4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>
